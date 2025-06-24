@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Ordering System</title>
+    <title>Iman Fried Chicken</title>
     <style>
         /* Global Styles */
         * {
@@ -196,112 +196,193 @@
 <body>
     <header>
         <div class="container">
-            <h1>Restaurant Ordering System</h1>
+            <h1>Iman Fried Chicken</h1>
         </div>
     </header>
     
     <main class="container">
         <div class="menu-section">
             <div class="category">
-                <h2>Appetizers</h2>
-                <div class="menu-item">
-                    <div>
-                        <span class="item-name">Bruschetta</span>
-                        <p class="item-description">Toasted bread with tomatoes, garlic and basil</p>
-                    </div>
-                    <div>
-                        <span class="item-price">$8.99</span>
-                        <button class="add-btn" data-name="Bruschetta" data-price="8.99">Add</button>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <span class="item-name">Calamari</span>
-                        <p class="item-description">Fried squid with marinara sauce</p>
-                    </div>
-                    <div>
-                        <span class="item-price">$12.99</span>
-                        <button class="add-btn" data-name="Calamari" data-price="12.99">Add</button>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <span class="item-name">Spinach Dip</span>
-                        <p class="item-description">Creamy spinach with tortilla chips</p>
-                    </div>
-                    <div>
-                        <span class="item-price">$9.99</span>
-                        <button class="add-btn" data-name="Spinach Dip" data-price="9.99">Add</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="category">
                 <h2>Main Courses</h2>
                 <div class="menu-item">
                     <div>
-                        <span class="item-name">Spaghetti Bolognese</span>
+                        <span class="item-name">Fried Chicken</span>
+                        <p class="item-description">Toasted bread with tomatoes, garlic and basil</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 3.50</span>
+                        <button class="add-btn" data-name="Fried Chicken" data-price="3.50">Add</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Fried Chicken (Hot & Spicy)</span>
+                        <p class="item-description">Fried squid with marinara sauce</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 3.50</span>
+                        <button class="add-btn" data-name="Hot Fried Chicken" data-price="3.50">Add</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Ayam Cheese</span>
+                        <p class="item-description">Creamy spinach with tortilla chips</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 8.00</span>
+                        <button class="add-btn" data-name="Ayam Cheese" data-price="8.00">Add</button>
+                    </div>
+                </div>
+                 <div class="menu-item">
+                    <div>
+                        <span class="item-name">Chicken Chop</span>
+                        <p class="item-description">Creamy spinach with tortilla chips</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 9.00</span>
+                        <button class="add-btn" data-name="Chicken Chop" data-price="9.00">Add</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Zinger Burger</span>
                         <p class="item-description">Classic pasta with meat sauce</p>
                     </div>
                     <div>
-                        <span class="item-price">$16.99</span>
-                        <button class="add-btn" data-name="Spaghetti Bolognese" data-price="16.99">Add</button>
+                        <span class="item-price">RM 5.00</span>
+                        <button class="add-btn" data-name="Zinger Burger" data-price="5.00">Add</button>
                     </div>
                 </div>
                 <div class="menu-item">
                     <div>
-                        <span class="item-name">Grilled Salmon</span>
+                        <span class="item-name">Black Pepper Burger</span>
                         <p class="item-description">Fresh salmon with lemon butter sauce</p>
                     </div>
                     <div>
-                        <span class="item-price">$22.99</span>
-                        <button class="add-btn" data-name="Grilled Salmon" data-price="22.99">Add</button>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <span class="item-name">Chicken Parmesan</span>
-                        <p class="item-description">Breaded chicken with marinara and cheese</p>
-                    </div>
-                    <div>
-                        <span class="item-price">$18.99</span>
-                        <button class="add-btn" data-name="Chicken Parmesan" data-price="18.99">Add</button>
+                        <span class="item-price">RM 6.00</span>
+                        <button class="add-btn" data-name="Black Pepper Burger" data-price="6.00">Add</button>
                     </div>
                 </div>
             </div>
             
             <div class="category">
-                <h2>Desserts</h2>
+                <h2>Side Courses</h2>
                 <div class="menu-item">
                     <div>
-                        <span class="item-name">Tiramisu</span>
+                        <span class="item-name">Chicken Tortilla</span>
+                        <p class="item-description">Creamy spinach with tortilla chips</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 6.00</span>
+                        <button class="add-btn" data-name="Chicken Tortilla" data-price="6.00">Add</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Potato Wedges</span>
+                        <p class="item-description">Breaded chicken with marinara and cheese</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 5.00</span>
+                        <button class="add-btn" data-name="Potato Wedges" data-price="5.00">Add</button>
+                    </div>
+                </div>
+                 <div class="menu-item">
+                    <div>
+                        <span class="item-name">Mash Potato</span>
+                        <p class="item-description">Creamy spinach with tortilla chips</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 2.00</span>
+                        <button class="add-btn" data-name="Mash Potato" data-price="2.00">Add</button>
+                    </div>
+                </div>
+                 <div class="menu-item">
+                    <div>
+                        <span class="item-name">Coleslaw</span>
+                        <p class="item-description">Creamy spinach with tortilla chips</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 2.00</span>
+                        <button class="add-btn" data-name="Coleslaw" data-price="2.00">Add</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Enoki</span>
+                        <p class="item-description">Creamy spinach with tortilla chips</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 4.00</span>
+                        <button class="add-btn" data-name="Enoki" data-price="4.00">Add</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category">
+                <h2>Drinks</h2>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Milo</span>
                         <p class="item-description">Classic Italian dessert</p>
                     </div>
                     <div>
-                        <span class="item-price">$7.99</span>
-                        <button class="add-btn" data-name="Tiramisu" data-price="7.99">Add</button>
+                        <span class="item-price">RM 3.00</span>
+                        <button class="add-btn" data-name="Milo" data-price="3.00">Add</button>
                     </div>
                 </div>
                 <div class="menu-item">
                     <div>
-                        <span class="item-name">Chocolate Lava Cake</span>
+                        <span class="item-name">Coffee</span>
                         <p class="item-description">Warm chocolate cake with molten center</p>
                     </div>
                     <div>
-                        <span class="item-price">$8.99</span>
-                        <button class="add-btn" data-name="Chocolate Lava Cake" data-price="8.99">Add</button>
+                        <span class="item-price">RM 3.00</span>
+                        <button class="add-btn" data-name="Coffee" data-price="3.00">Add</button>
                     </div>
                 </div>
                 <div class="menu-item">
                     <div>
-                        <span class="item-name">Cheesecake</span>
+                        <span class="item-name">Lemon Tea</span>
                         <p class="item-description">New York style with berry topping</p>
                     </div>
                     <div>
-                        <span class="item-price">$7.99</span>
-                        <button class="add-btn" data-name="Cheesecake" data-price="7.99">Add</button>
+                        <span class="item-price">RM 3.00</span>
+                        <button class="add-btn" data-name="Lemon Tea" data-price="3.00">Add</button>
                     </div>
                 </div>
+                                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Lemonade</span>
+                        <p class="item-description">New York style with berry topping</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 3.00</span>
+                        <button class="add-btn" data-name="Lemonade" data-price="3.00">Add</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Nescafe White</span>
+                        <p class="item-description">New York style with berry topping</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 3.00</span>
+                        <button class="add-btn" data-name="Nescafe White" data-price="3.00">Add</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Mineral Botol</span>
+                        <p class="item-description">New York style with berry topping</p>
+                    </div>
+                    <div>
+                        <span class="item-price">RM 1.00</span>
+                        <button class="add-btn" data-name="Mineral Botol" data-price="1.00">Add</button>
+                    </div>
+                </div>
+  
             </div>
         </div>
         
@@ -312,7 +393,7 @@
                 <p>Your order is empty</p>
             </div>
             <div class="total-section">
-                Total: $<span id="order-total">0.00</span>
+                Total: RM<span id="order-total">0.00</span>
             </div>
             <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
         </div>
@@ -331,10 +412,6 @@
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
                     <input type="tel" id="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="address">Delivery Address</label>
-                    <textarea id="address" rows="3" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="payment">Payment Method</label>
