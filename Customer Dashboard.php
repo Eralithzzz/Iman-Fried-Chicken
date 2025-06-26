@@ -276,7 +276,7 @@
             let menuData = {};
             
             // Fetch menu data from server
-            fetch('/api/menu')
+            fetch('api/menu.php') // Adjust the path to your API endpoint
                 .then(response => response.json())
                 .then(data => {
                     menuData = data;
@@ -470,7 +470,7 @@
                 submitBtn.textContent = 'Processing...';
                 
                 // Send order to server
-                fetch('/api/orders', {
+                fetch('api/orders.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -492,10 +492,7 @@
                     updateOrderSummary();
                     paymentForm.reset();
                     paymentMethod.style.display = 'none';
-                })
-                .catch(error => {
-                    console.error('Error submitting order:', error);
-                    alert('There was an error processing your order. Please try again.');
+                
                 })
                 .finally(() => {
                     submitBtn.disabled = false;
