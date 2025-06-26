@@ -7,7 +7,39 @@ $dbconn = oci_connect($user, $pass, $host);
 if (!$dbconn) {
  $e = oci_error();
  trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-} else {
- echo "ORACLE DATABASE SUCCESSFULLY!!!<br>"; //you can remove this
+}
+
+function executeQuery($query, $params = []) {
+    global $db_conn;
+    
+    $stmt = oci_parse($db_conn, $query);
+    if (!$stmt) {
+        $e = oci_error($db_conn);
+        throw new Exception("SQL Error: " . $e['message']);
+    }
+    
+    // Bind parameters if provided
+    foreach ($params as $key => $value) {
+        oci_bind_by_name($stmt, $key, $params[$key]);
+    }
+    
+    if (!oci_execute($stmt)) {
+        $e = oci_error($stmt);
+        throw new Exception("Execution Error: " . $e['message']);
+    }
+    
+    return $stmt;
+}
+
+// Function to fetch all rows
+function fetchAll($query, $params = []) {
+    $stmt = executeQuery($query, $params);
+    $results = [];
+    
+    while ($row = oci_fetch_assoc($stmt)) {
+        $results[] = $row;
+    }
+    
+    return $results;
 }
 ?>
