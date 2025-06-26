@@ -3,7 +3,7 @@
 
 $host = "localhost:1521/FREEPDB1"; // Replace with your Oracle service name
 $username = "Eralithzzz"; // Oracle username
-$password = "oracle"; // Oracle password
+$password = "Eralithzzz"; // Oracle password
 
 // Establish connection
 $conn = oci_connect($username, $password, $host);
