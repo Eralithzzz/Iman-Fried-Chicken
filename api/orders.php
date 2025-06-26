@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
 
-require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../oracle.php';
 
 try {
     $db = new db();

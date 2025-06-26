@@ -3,8 +3,8 @@
 $user = "Eralithzzz"; //oracle username
 $pass = "Eralithzzz"; //Oracle password
 $host = "localhost:1521/FREEPDB1"; //server name or ip address
-$dbconn = oci_connect($user, $pass, $host);
-if (!$dbconn) {
+$db_conn = oci_connect($user, $pass, $host);
+if (!$db_conn) {
  $e = oci_error();
  trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
