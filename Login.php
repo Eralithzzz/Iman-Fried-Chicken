@@ -8,10 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['staff_password'] ?? '';
 
     $sql = "SELECT * FROM Staff WHERE staff_username = :username AND staff_password = :password";
-    $stmt = oci_parse($dbconn, $sql);
+    $stmt = oci_parse($db_conn, $sql);
 
     oci_bind_by_name($stmt, ':username', $username);
-    oci_bind_by_name($stmt, ':password', $password); // ⚠️ Plaintext – hash recommended
+    oci_bind_by_name($stmt, ':password', $password); 
 
     oci_execute($stmt);
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['staff_id'] = $row['STAFF_ID'];
         $_SESSION['staff_name'] = $row['STAFF_NAME'];
         
-        echo "<script>alert('Staff registered successfully!'); window.location.href='Staff Page.php';</script>";
+        echo "<script>alert('Login successfully!'); window.location.href='Staff Page.php';</script>";
        
         exit();
     } else {
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     oci_free_statement($stmt);
-    oci_close($dbconn);
+    oci_close($db_conn);
 }
 ?>
 <!DOCTYPE html>

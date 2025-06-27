@@ -13,20 +13,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $staff_gender   = $_POST['staff_gender'] ?? '';
     $staff_username = $_POST['staff_username'] ?? '';
     $staff_password = $_POST['staff_password'] ?? '';
+    $staff_type = $_POST['staff_type'] ?? '';
     $manager_id     = !empty($_POST['manager_id']) ? $_POST['manager_id'] : null;
 
-    if (!$staff_name || !$staff_age || !$staff_username || !$staff_password) {
+    if (!$staff_name || !$staff_age || !$staff_username || !$staff_password || !$staff_type) {
         $errorMessage = "Please fill in all required fields.";
     } else {
         $sql = "INSERT INTO Staff (
                     STAFF_ID, STAFF_NAME, STAFF_AGE, STAFF_PHONE, STAFF_GENDER,
-                    STAFF_USERNAME, STAFF_PASSWORD, MANAGER_ID
+                    STAFF_USERNAME, STAFF_PASSWORD, MANAGER_ID, STAFF_TYPE
                 ) VALUES (
                     staff_seq.NEXTVAL, :name, :age, :phone, :gender,
-                    :username, :password, :manager
+                    :username, :password, :manager, :staff_type
                 )";
 
-        $stid = oci_parse($dbconn, $sql);
+        $stid = oci_parse($db_conn, $sql);
 
         // Bind values
         oci_bind_by_name($stid, ':name', $staff_name);
@@ -36,18 +37,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         oci_bind_by_name($stid, ':username', $staff_username);
         oci_bind_by_name($stid, ':password', $staff_password); // You can hash here if needed
         oci_bind_by_name($stid, ':manager', $manager_id);
+        oci_bind_by_name($stid, ':staff_type', $staff_type);
 
-        // Execute and check
-        if (oci_execute($stid)) {
-            $successMessage = "Staff registered successfully!";
+         if (oci_execute($stid)) {
+            // Get the inserted staff_id
+            $queryID = "SELECT staff_seq.CURRVAL AS ID FROM dual";
+            $idStmt = oci_parse($db_conn, $queryID);
+            oci_execute($idStmt);
+            $row = oci_fetch_assoc($idStmt);
+            $new_staff_id = $row['ID'];
+
+            // Insert into subtype table
+            if ($staff_type === 'FT') {
+                $insertSub = oci_parse($db_conn, "INSERT INTO FULL_TIME_STAFF (STAFF_ID) VALUES (:id)");
+            } else {
+                $insertSub = oci_parse($db_conn, "INSERT INTO PART_TIME_STAFF (STAFF_ID) VALUES (:id)");
+            }
+            oci_bind_by_name($insertSub, ':id', $new_staff_id);
+            oci_execute($insertSub);
+
+            oci_free_statement($idStmt);
+            oci_free_statement($insertSub);
+
+            echo "<script>alert('Staff registered successfully!'); window.location.href='Login.php';</script>";
         } else {
             $e = oci_error($stid);
             $errorMessage = "Registration failed: " . $e['message'];
         }
-        echo "<script>alert('Staff registered successfully!'); window.location.href='login.php';</script>";
 
         oci_free_statement($stid);
-        oci_close($dbconn);
+        oci_close($db_conn);
     }
 }
 ?>
@@ -224,6 +243,12 @@ button{
                 <input type="number" name="manager_id" id="manager" placeholder="Manager ID">
             </div>
             <div class="input-group">
+                <label for="staff_type">Staff Type</label>
+                <select name="staff_type" id="staff_type" required>
+                    <option value="">-- Select Type --</option>
+                    <option value="FT">FT - Full Time Staff</option>
+                    <option value="PT">PT - Part Time Staff</option>
+                </select>
             </div>
         </div>
     
