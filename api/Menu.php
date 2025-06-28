@@ -2,11 +2,11 @@
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
 
-require_once __DIR__ . '/../db.php';  // ✅ Correct: go up one folder
+require_once __DIR__ . '/../oracle.php';  // This should point to your db file (e.g., db.php)
 
 try {
-    $db = new db();
-    $conn = $db->connect();
+    $oracle = new Oracle();  // ✅ Correct class instantiation
+    $conn = $oracle->connect();
 
     $sql = "SELECT menu_id, menu_name, menu_price, menu_availability FROM Menu ORDER BY menu_id";
     $stid = oci_parse($conn, $sql);
@@ -29,7 +29,7 @@ try {
     echo json_encode($menu);
 
     oci_free_statement($stid);
-    $db->close();
+    $oracle->close();  // ✅ Close connection properly
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['error' => $e->getMessage()]);

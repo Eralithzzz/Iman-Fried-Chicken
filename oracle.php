@@ -1,45 +1,65 @@
 <?php
-// php & Oracle DB connection file
-$user = "Eralithzzz"; //oracle username
-$pass = "Eralithzzz"; //Oracle password
-$host = "localhost:1521/FREEPDB1"; //server name or ip address
-$dbconn = oci_connect($user, $pass, $host);
-if (!$dbconn) {
- $e = oci_error();
- trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-}
+// db.php
 
-function executeQuery($query, $params = []) {
-    global $db_conn;
-    
-    $stmt = oci_parse($db_conn, $query);
-    if (!$stmt) {
-        $e = oci_error($db_conn);
-        throw new Exception("SQL Error: " . $e['message']);
-    }
-    
-    // Bind parameters if provided
-    foreach ($params as $key => $value) {
-        oci_bind_by_name($stmt, $key, $params[$key]);
-    }
-    
-    if (!oci_execute($stmt)) {
-        $e = oci_error($stmt);
-        throw new Exception("Execution Error: " . $e['message']);
-    }
-    
-    return $stmt;
-}
+class Oracle {
+    private $host = "localhost:1521/FREEPDB1"; // Replace if needed
+    private $username = "Eralithzzz";
+    private $password = "Eralithzzz";
+    private $conn;
 
-// Function to fetch all rows
-function fetchAll($query, $params = []) {
-    $stmt = executeQuery($query, $params);
-    $results = [];
-    
-    while ($row = oci_fetch_assoc($stmt)) {
-        $results[] = $row;
+    // Connect to Oracle DB
+    public function connect() {
+        $this->conn = oci_connect($this->username, $this->password, $this->host);
+
+        if (!$this->conn) {
+            $e = oci_error();
+            throw new Exception("Connection failed: " . $e['message']);
+        }
+
+        return $this->conn;
     }
-    
-    return $results;
+
+    // Close Oracle connection
+    public function close() {
+        if ($this->conn) {
+            oci_close($this->conn);
+        }
+    }
+
+    // Execute a query with optional parameters
+    public function executeQuery($query, $params = []) {
+        if (!$this->conn) {
+            throw new Exception("No active database connection.");
+        }
+
+        $stmt = oci_parse($this->conn, $query);
+        if (!$stmt) {
+            $e = oci_error($this->conn);
+            throw new Exception("SQL Error: " . $e['message']);
+        }
+
+        foreach ($params as $key => $value) {
+            oci_bind_by_name($stmt, $key, $params[$key]);
+        }
+
+        if (!oci_execute($stmt)) {
+            $e = oci_error($stmt);
+            throw new Exception("Execution Error: " . $e['message']);
+        }
+
+        return $stmt;
+    }
+
+    // Fetch all rows from a SELECT query
+    public function fetchAll($query, $params = []) {
+        $stmt = $this->executeQuery($query, $params);
+        $results = [];
+
+        while ($row = oci_fetch_assoc($stmt)) {
+            $results[] = $row;
+        }
+
+        return $results;
+    }
 }
 ?>
