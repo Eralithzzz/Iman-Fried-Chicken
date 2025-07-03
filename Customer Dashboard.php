@@ -484,14 +484,7 @@
                     return response.json();
                 })
                 .then(data => {
-                    alert(`Order #${data.order_id} placed successfully!\nTotal: RM ${total.toFixed(2)}\nPayment Method: ${paymentMethod}\nThank you for your order!`);
-                    
-                    // Reset the cart
-                    cart = [];
-                    total = 0;
-                    updateOrderSummary();
-                    paymentForm.reset();
-                    paymentMethod.style.display = 'none';
+                    window.location.href = `receipt.php?order_id=${data.order_id}&pay_id=${data.pay_id}&method=${paymentMethod}&total=${total.toFixed(2)}`;
                 
                 })
                 .finally(() => {
