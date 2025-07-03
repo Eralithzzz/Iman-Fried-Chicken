@@ -117,10 +117,9 @@ session_start();
         <div class="form-group">
           <label for="menuCategory">Category</label>
           <select id="menuCategory" required>
-            <option value="MAIN_COURSES">Main Courses</option>
-            <option value="SIDE_DISHES">Side Dishes</option>
+            <option value="MAIN COURSES">Main Courses</option>
+            <option value="SIDE DISHES">Side Dishes</option>
             <option value="DRINKS">Drinks</option>
-            <option value="DESSERTS">Desserts</option>
           </select>
         </div>
         <div class="form-group">
