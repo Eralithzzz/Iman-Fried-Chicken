@@ -1,0 +1,114 @@
+body {
+   background: url('images/bg.jpg') no-repeat center center fixed;
+   background-size: cover;
+   font-family: 'Poppins', sans-serif;
+  }
+  .menu-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  .menu-card:hover {
+    transform: scale(1.02);
+  }
+  .menu-item-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .menu-item-price {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  .out-of-stock {
+    color: #999;
+    font-style: italic;
+    font-size: 0.9em;
+  }
+  .add-btn {
+    border-radius: 20px;
+    background: #28a745;
+    color: white;
+    transition: background 0.3s;
+  }
+  .add-btn:hover {
+    background: #218838;
+  }
+  .card-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+  .quantity-btn {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+  .remove-btn {
+    background: none;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+    border-radius: 20px;
+  }
+  #checkout-btn, #payment-form button {
+    border-radius: 30px;
+    font-size: 1.1rem;
+  }
+  .brand-title {
+  font-size: 1.8rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #ffc107; /* golden yellow */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Navbar background with blur and soft transparency */
+.custom-navbar {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  padding: 1.2rem 0;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  margin-bottom: 1rem;
+}
+
+/* Stylish gradient text with glow */
+.brand-glow {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 8s ease infinite, fadeSlideIn 1.5s ease-out forwards;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
