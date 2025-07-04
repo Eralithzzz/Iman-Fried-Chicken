@@ -5,6 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Staff Menu Management - Iman Fried Chicken</title>
@@ -15,64 +16,93 @@ session_start();
     }
     body {
       margin: 0;
-      padding: 20px;
-      background-color: #f5f5f5;
+      padding: 0;
+      background: linear-gradient(to right, #f8f9fa, #e0f7fa);
     }
     .container {
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 40px auto;
       background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
     h1 {
       color: #e74c3c;
       text-align: center;
-    }
-    .menu-form {
-      background: #f9f9f9;
-      padding: 20px;
-      border-radius: 8px;
+      font-size: 2.5rem;
       margin-bottom: 30px;
     }
+    .menu-form {
+      background: #fefefe;
+      padding: 25px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+    }
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
     label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       font-weight: 600;
+      color: #333;
     }
     input, select {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border 0.3s;
+    }
+    input:focus, select:focus {
+      border-color: #3498db;
+      outline: none;
     }
     button {
       background-color: #2ecc71;
       color: white;
       border: none;
-      padding: 10px 15px;
-      border-radius: 4px;
+      padding: 12px 18px;
+      border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #27ae60;
     }
     button.delete {
       background-color: #e74c3c;
     }
+    button.delete:hover {
+      background-color: #c0392b;
+    }
+    #menuTable {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
     }
     th, td {
-      padding: 12px 15px;
-      border-bottom: 1px solid #ddd;
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
     }
     th {
-      background-color: #f2f2f2;
+      background-color: #fafafa;
+      color: #555;
     }
     .availability-toggle {
       cursor: pointer;
@@ -97,26 +127,41 @@ session_start();
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    img {
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    img:hover {
+      transform: scale(1.1);
+    }
+    .edit-btn, .delete-btn {
+      padding: 6px 12px;
+      margin: 2px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
+  <?php include 'sidebar.php'; ?>
+  <div class="main-content"></div>
   <div class="container">
-    <h1>Menu Management</h1>
+    <h1><i class="fas fa-utensils"></i> Menu Management</h1>
     <div class="menu-form">
       <h2>Add/Edit Menu Item</h2>
-      <form id="menuForm">
+      <form id="menuForm" enctype="multipart/form-data">
         <input type="hidden" id="menuId">
         <div class="form-group">
           <label for="menuName">Item Name</label>
-          <input type="text" id="menuName" required>
+          <input type="text" id="menuName" name="menu_name" required>
         </div>
         <div class="form-group">
           <label for="menuPrice">Price (RM)</label>
-          <input type="number" id="menuPrice" min="0" step="0.01" required>
+          <input type="number" id="menuPrice" name="menu_price" min="0" step="0.01" required>
         </div>
         <div class="form-group">
           <label for="menuCategory">Category</label>
-          <select id="menuCategory" required>
+          <select id="menuCategory" name="category" required>
             <option value="MAIN COURSES">Main Courses</option>
             <option value="SIDE DISHES">Side Dishes</option>
             <option value="DRINKS">Drinks</option>
@@ -124,10 +169,14 @@ session_start();
         </div>
         <div class="form-group">
           <label for="menuAvailability">Availability</label>
-          <select id="menuAvailability" required>
+          <select id="menuAvailability" name="menu_availability" required>
             <option value="YES">Available</option>
             <option value="NO">Unavailable</option>
           </select>
+        </div>
+        <div class="form-group">
+          <label for="menuImage">Upload Image</label>
+          <input type="file" id="menuImage" name="menu_image" accept="image/*">
         </div>
         <button type="submit" id="saveBtn">Save Item</button>
         <button type="button" id="cancelBtn" style="display:none;">Cancel</button>
@@ -142,6 +191,7 @@ session_start();
     <table id="menuTable" style="display:none;">
       <thead>
         <tr>
+          <th>Image</th>
           <th>Name</th>
           <th>Price</th>
           <th>Category</th>
@@ -179,6 +229,7 @@ session_start();
         items.forEach(item => {
           menuItems.innerHTML += `
             <tr>
+              <td><img src="images/${item.menu_image}" alt="${item.menu_name}" style="width:60px; height:auto; border-radius:5px;" /></td>
               <td>${item.menu_name}</td>
               <td>RM ${parseFloat(item.menu_price).toFixed(2)}</td>
               <td>${item.category}</td>
@@ -234,40 +285,35 @@ session_start();
       };
 
       form.onsubmit = (e) => {
-  e.preventDefault();
-  const data = {
-    menu_name: document.getElementById('menuName').value,
-    menu_price: parseFloat(document.getElementById('menuPrice').value),
-    category: document.getElementById('menuCategory').value,
-    menu_availability: document.getElementById('menuAvailability').value
-  };
+        e.preventDefault();
 
-  const method = editMode ? 'PUT' : 'POST';
-  const url = editMode ? `api/Menu.php?id=${editId}` : 'api/Menu.php';  // 
+        const formData = new FormData(form);
 
-  fetch(url, {
-  method: method,
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(data)
-})
-.then(res => {
-  if (!res.ok) {
-    return res.text().then(text => { throw new Error(text); });
-  }
-  return res.json();
-})
-.then(() => {
-  form.reset();
-  cancelBtn.style.display = 'none';
-  saveBtn.textContent = 'Save Item';
-  editMode = false;
-  getMenuItems();
-})
-.catch(err => {
-  console.error("Server error:\n", err.message);
-  alert("Error: Check browser console (F12 > Console)");
-});
-};
+        const method = editMode ? 'POST' : 'POST';
+        const url = editMode ? `api/Menu.php?id=${editId}&_method=PUT` : 'api/Menu.php';
+
+        fetch(url, {
+          method: method,
+          body: formData
+        })
+        .then(res => {
+          if (!res.ok) {
+            return res.text().then(text => { throw new Error(text); });
+          }
+          return res.json();
+        })
+        .then(() => {
+          form.reset();
+          cancelBtn.style.display = 'none';
+          saveBtn.textContent = 'Save Item';
+          editMode = false;
+          getMenuItems();
+        })
+        .catch(err => {
+          console.error("Server error:\n", err.message);
+          alert("Error: Check browser console (F12 > Console)");
+        });
+      };
 
       function deleteItem(id) {
         if (!confirm('Delete this menu item?')) return;

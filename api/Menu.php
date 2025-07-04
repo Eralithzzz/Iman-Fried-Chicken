@@ -7,11 +7,17 @@ header("Access-Control-Allow-Headers: Content-Type");
 require_once __DIR__ . '/../oracle.php'; // Adjust if needed
 
 $method = $_SERVER['REQUEST_METHOD'];
-$input = json_decode(file_get_contents('php://input'), true);
+$realMethod = $_SERVER['REQUEST_METHOD'];
+
+// Support _method override for PUT with file uploads
+if ($method === 'POST' && isset($_GET['_method']) && $_GET['_method'] === 'PUT') {
+    $realMethod = 'PUT';
+}
+
 $id = $_GET['id'] ?? null;
 
 try {
-    switch ($method) {
+    switch ($realMethod) {
         case 'GET':
             $sql = "SELECT menu_id, menu_name, menu_price, menu_availability, category, menu_image FROM Menu ORDER BY menu_id";
             $stid = oci_parse($db_conn, $sql);
@@ -34,14 +40,27 @@ try {
             break;
 
         case 'POST':
+            // Use $_POST and $_FILES
+            $name = $_POST['menu_name'];
+            $price = $_POST['menu_price'];
+            $avail = $_POST['menu_availability'];
+            $cat = $_POST['category'];
+            $imageName = '';
+
+            if (isset($_FILES['menu_image']) && $_FILES['menu_image']['error'] === UPLOAD_ERR_OK) {
+                $ext = pathinfo($_FILES['menu_image']['name'], PATHINFO_EXTENSION);
+                $imageName = uniqid('menu_', true) . '.' . $ext;
+                move_uploaded_file($_FILES['menu_image']['tmp_name'], __DIR__ . '/../images/' . $imageName);
+            }
+
             $sql = "INSERT INTO Menu (menu_id, menu_name, menu_price, menu_availability, category, menu_image) 
                     VALUES (menu_seq.NEXTVAL, :name, :price, :avail, :cat, :img)";
             $stid = oci_parse($db_conn, $sql);
-            oci_bind_by_name($stid, ':name', $input['menu_name']);
-            oci_bind_by_name($stid, ':price', $input['menu_price']);
-            oci_bind_by_name($stid, ':avail', $input['menu_availability']);
-            oci_bind_by_name($stid, ':cat', $input['category']);
-            oci_bind_by_name($stid, ':img', $input['menu_image']);
+            oci_bind_by_name($stid, ':name', $name);
+            oci_bind_by_name($stid, ':price', $price);
+            oci_bind_by_name($stid, ':avail', $avail);
+            oci_bind_by_name($stid, ':cat', $cat);
+            oci_bind_by_name($stid, ':img', $imageName);
             oci_execute($stid);
             echo json_encode(['message' => 'Menu item added']);
             break;
@@ -49,28 +68,44 @@ try {
         case 'PUT':
             if (!$id) throw new Exception("ID is required for update.");
 
-            if (isset($input['availability'])) {
-                // Toggle only availability
+            // Toggle availability (from JS toggleAvailability)
+            $rawData = json_decode(file_get_contents("php://input"), true);
+            if (isset($rawData['availability'])) {
                 $sql = "UPDATE Menu SET menu_availability = :avail WHERE menu_id = :id";
                 $stid = oci_parse($db_conn, $sql);
-                oci_bind_by_name($stid, ':avail', $input['availability']);
-            } else {
-                // Full update including image
-                $sql = "UPDATE Menu SET 
+                oci_bind_by_name($stid, ':avail', $rawData['availability']);
+                oci_bind_by_name($stid, ':id', $id);
+                oci_execute($stid);
+                echo json_encode(['message' => 'Availability updated']);
+                break;
+            }
+
+            // Full form update (from FormData override PUT)
+            $name = $_POST['menu_name'];
+            $price = $_POST['menu_price'];
+            $avail = $_POST['menu_availability'];
+            $cat = $_POST['category'];
+            $imageName = $_POST['existing_image'] ?? ''; // Optional hidden field
+
+            if (isset($_FILES['menu_image']) && $_FILES['menu_image']['error'] === UPLOAD_ERR_OK) {
+                $ext = pathinfo($_FILES['menu_image']['name'], PATHINFO_EXTENSION);
+                $imageName = uniqid('menu_', true) . '.' . $ext;
+                move_uploaded_file($_FILES['menu_image']['tmp_name'], __DIR__ . '/../images/' . $imageName);
+            }
+
+            $sql = "UPDATE Menu SET 
                         menu_name = :name,
                         menu_price = :price,
                         menu_availability = :avail,
                         category = :cat,
                         menu_image = :img
-                        WHERE menu_id = :id";
-                $stid = oci_parse($db_conn, $sql);
-                oci_bind_by_name($stid, ':name', $input['menu_name']);
-                oci_bind_by_name($stid, ':price', $input['menu_price']);
-                oci_bind_by_name($stid, ':avail', $input['menu_availability']);
-                oci_bind_by_name($stid, ':cat', $input['category']);
-                oci_bind_by_name($stid, ':img', $input['menu_image']);
-            }
-
+                    WHERE menu_id = :id";
+            $stid = oci_parse($db_conn, $sql);
+            oci_bind_by_name($stid, ':name', $name);
+            oci_bind_by_name($stid, ':price', $price);
+            oci_bind_by_name($stid, ':avail', $avail);
+            oci_bind_by_name($stid, ':cat', $cat);
+            oci_bind_by_name($stid, ':img', $imageName);
             oci_bind_by_name($stid, ':id', $id);
             oci_execute($stid);
             echo json_encode(['message' => 'Menu item updated']);
