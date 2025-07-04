@@ -1,10 +1,10 @@
 <!-- enhanced index.php -->
 <?php include('header.php'); ?>
 <link rel="stylesheet" href="assets/style.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
 <main class="container py-4">
-    <body style="background: url('images/bg3.png') no-repeat center center fixed; background-size: cover;"></body>
+    <body style="background: url('images/bg1.png') no-repeat center center fixed; background-size: cover;"></body>
   <div id="menu-section" class="row gy-4 mb-4 text-center">
     <div class="col-12">
       <div class="spinner-border text-primary" role="status"></div>
