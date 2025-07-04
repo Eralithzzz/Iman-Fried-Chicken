@@ -19,7 +19,7 @@
     <div class="info"><strong>Total:</strong> RM <span id="total"></span></div>
     <div class="info"><strong>Payment Method:</strong> <span id="method"></span></div>
     
-    <a href="Customer Dashboard.php" class="back-btn">Back to Menu</a>
+    <a href="index.php" class="back-btn">Back to Menu</a>
   </div>
 
   <script>
