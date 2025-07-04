@@ -4,7 +4,7 @@
 
 
 <main class="container py-4">
-    <body style="background: url('images/bg.jpg') no-repeat center center fixed; background-size: cover;"></body>
+    <body style="background: url('images/bg3.png') no-repeat center center fixed; background-size: cover;"></body>
   <div id="menu-section" class="row gy-4 mb-4 text-center">
     <div class="col-12">
       <div class="spinner-border text-primary" role="status"></div>
