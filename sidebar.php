@@ -1,13 +1,31 @@
-<!-- sidebar.php -->
-<!-- sidebar.php -->
+<?php
+// Start session and connect DB if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once 'oracle.php';
+
+// Determine if this staff is a manager
+$isManager = false;
+if (isset($_SESSION['staff_id'])) {
+    $sid = $_SESSION['staff_id'];
+    $check = oci_parse($db_conn, "SELECT COUNT(*) AS CNT FROM staff WHERE manager_id = :sid");
+    oci_bind_by_name($check, ":sid", $sid);
+    oci_execute($check);
+    $res = oci_fetch_assoc($check);
+    $isManager = ($res['CNT'] > 0);
+}
+?>
+
+<!-- sidebar.php HTML -->
 <div class="sidebar">
   <div class="logo">
-  <img src="images/nasil.jpg" alt="IFC Logo" class="logo-img">
-  <span class="logo-name">IFC Staff</span>
-</div>
+    <img src="images/nasil.jpg" alt="IFC Logo" class="logo-img">
+    <span class="logo-name">IFC Staff</span>
+  </div>
   <ul class="nav-links">
     <li>
-      <a href="menu_management.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'menu_management.php') ? 'active' : ''; ?>">
+      <a href="Staff Page.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'Staff Page.php') ? 'active' : ''; ?>">
         <i class="fas fa-utensils"></i>
         <span class="link-name">Menu</span>
       </a>
@@ -18,12 +36,15 @@
         <span class="link-name">Reports</span>
       </a>
     </li>
+    
+    <?php if ($isManager): ?>
     <li>
-      <a href="orders.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'manager.php') ? 'active' : ''; ?>">
+      <a href="manager.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'manager.php') ? 'active' : ''; ?>">
         <i class="fas fa-receipt"></i>
         <span class="link-name">Manager</span>
       </a>
     </li>
+    <?php endif; ?>
     
   </ul>
 </div>
