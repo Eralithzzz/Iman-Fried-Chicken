@@ -20,7 +20,11 @@ if (isset($_SESSION['staff_id'])) {
 <!-- sidebar.php HTML -->
 <div class="sidebar">
   <div class="logo">
+<<<<<<< HEAD
     <img src="images/logoIFC.png" alt="IFC Logo" class="logo-img">
+=======
+    <img src="images/logo2.png" alt="IFC Logo" class="logo-img">
+>>>>>>> e7b6c3c6e463a4b8753e9dddc2c39e8687ea13d0
     <span class="logo-name">IFC Staff</span>
   </div>
   <ul class="nav-links">
