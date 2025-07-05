@@ -80,121 +80,155 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <!--Stylesheet-->
-    <style media="screen">
-      *,
-*:before,
-*:after{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-body{
-    background-color: #080710;
-}
-.background{
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-}
-.background .shape{
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    border-radius: 50%;
-}
-.shape:first-child{
-    background: linear-gradient(
-        #1845ad,
-        #23a2f6
-    );
-    left: -80px;
-    top: -80px;
-}
-.shape:last-child{
-    background: linear-gradient(
-        to right,
-        #ff512f,
-        #f09819
-    );
-    right: -30px;
-    bottom: -80px;
-}
-form{
-    height: auto; /* Changed from fixed height */
-    width: 800px;
-    background-color: rgba(255,255,255,0.13);
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 30px 35px; /* Reduced padding */
-}
-form *{
-    font-family: 'Poppins',sans-serif;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-    outline: none;
-    border: none;
-}
-form h3{
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 42px;
-    text-align: center;
-    margin-bottom: 20px; /* Added margin below title */
-}
+<style media="screen">
+    *,
+    *:before,
+    *:after{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body{
+        background-color: #FFF5E1; /* Light creamy background */
+        background-image: url('https://transparenttextures.com/patterns/food.png'); /* Subtle food pattern */
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .background{
+        width: 430px;
+        height: 520px;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        left: 50%;
+        top: 50%;
+    }
+    .background .shape{
+        height: 200px;
+        width: 200px;
+        position: absolute;
+        border-radius: 50%;
+    }
+    .shape:first-child{
+        background: radial-gradient(
+            #FFD700, /* Golden yellow */
+            #DAA520  /* Golden rod */
+        );
+        left: -80px;
+        top: -80px;
+        opacity: 0.8;
+    }
+    .shape:last-child{
+        background: radial-gradient(
+            #8B0000, /* Dark red */
+            #FF4500  /* Orange red */
+        );
+        right: -30px;
+        bottom: -80px;
+        opacity: 0.8;
+    }
+    form{
+        height: auto;
+        width: 800px;
+        background-color: rgba(139, 0, 0, 0.8); /* Dark red background */
+        position: absolute;
+        transform: translate(-50%,-50%);
+        top: 50%;
+        left: 50%;
+        border-radius: 15px;
+        border: 5px dashed #FFD700; /* Golden dashed border */
+        box-shadow: 0 0 30px rgba(139, 0, 0, 0.8);
+        padding: 25px 35px;
+    }
+    form *{
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        color: #FFD700; /* Golden text */
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+        text-shadow: 1px 1px 2px #000;
+    }
+    form h3{
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 42px;
+        text-align: center;
+        margin-bottom: 25px;
+        color: #FFFFFF;
+        text-shadow: 2px 2px 4px #000;
+        font-family: 'Impact', fantasy, sans-serif;
+    }
 
-label{
-    display: block;
-    margin-top: 15px; /* Reduced from 30px */
-    font-size: 16px;
-    font-weight: 500;
-}
-input{
-    display: block;
-    height: 45px; /* Slightly reduced height */
-    width: 100%; /* Changed from 150% */
-    background-color: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    padding: 0 10px;
-    margin-top: 5px; /* Reduced from 8px */
-    font-size: 14px;
-    font-weight: 300;
-}
-::placeholder{
-    color: #e5e5e5;
-}
-button{
-    margin-top: 20px; /* Adjusted margin */
-    width: 100%;
-    background-color: #ffffff;
-    color: #080710;
-    padding: 12px 0; /* Slightly reduced padding */
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.form-row {
-    display: flex;
-    gap: 15px; /* Reduced from 20px */
-    margin-bottom: 5px; /* Added small bottom margin */
-}
-.input-group {
-    flex: 1;
-}
-#signin-links{
-    margin-top: 15px;
-    text-align: center;
-}
-    </style>
+    label{
+        display: block;
+        margin-top: 15px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    input{
+        display: block;
+        height: 50px;
+        width: 100%;
+        background-color: rgba(255, 215, 0, 0.2); /* Golden tint */
+        border-radius: 8px;
+        padding: 0 15px;
+        margin-top: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        border: 2px solid #FFD700;
+    }
+    ::placeholder{
+        color: #FFEBCD; /* Blanched almond */
+        opacity: 0.7;
+    }
+    button{
+        margin-top: 25px;
+        width: 100%;
+        background: linear-gradient(
+            to bottom,
+            #FFD700,
+            #DAA520
+        );
+        color: #8B0000;
+        padding: 15px 0;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 4px 0 #8B0000;
+        transition: all 0.2s;
+    }
+    button:hover{
+        background: linear-gradient(
+            to bottom,
+            #FFDF00,
+            #FFA500
+        );
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 #8B0000;
+    }
+    .form-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 10px;
+    }
+    .input-group {
+        flex: 1;
+    }
+    #signin-links{
+        margin-top: 20px;
+        text-align: center;
+        font-size: 16px;
+    }
+    #signin-links a {
+        color: #FFFFFF;
+        text-decoration: none;
+        font-weight: bold;
+        border-bottom: 2px dotted #FFD700;
+    }
+    #signin-links a:hover {
+        color: #FFD700;
+    }
+</style>
 </head>
 <body>
     <div class="background">

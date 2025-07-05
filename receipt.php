@@ -13,7 +13,7 @@
     }
 
     body {
-      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      background: #FFF5E1 url('https://transparenttextures.com/patterns/food.png');
       padding: 60px 20px;
       display: flex;
       justify-content: center;

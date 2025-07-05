@@ -35,7 +35,7 @@ if ($row['CNT'] == 0) {
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #f8f9fa, #e0f7fa);
+      background: #FFF5E1 url('https://transparenttextures.com/patterns/food.png');
     }
     .container {
       max-width: 1200px;

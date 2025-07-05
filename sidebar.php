@@ -17,14 +17,9 @@ if (isset($_SESSION['staff_id'])) {
 }
 ?>
 
-<!-- sidebar.php HTML -->
 <div class="sidebar">
   <div class="logo">
-<<<<<<< HEAD
-    <img src="images/logoIFC.png" alt="IFC Logo" class="logo-img">
-=======
     <img src="images/logo2.png" alt="IFC Logo" class="logo-img">
->>>>>>> e7b6c3c6e463a4b8753e9dddc2c39e8687ea13d0
     <span class="logo-name">IFC Staff</span>
   </div>
   <ul class="nav-links">
@@ -49,23 +44,29 @@ if (isset($_SESSION['staff_id'])) {
       </a>
     </li>
     <?php endif; ?>
-    
   </ul>
 </div>
 
 <style>
-  /* Sidebar Base Styles */
+  /* Fried Chicken Shop Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 80px;
-  background: #111;
+  background: #8B0000; /* Dark red like ketchup */
+  background-image: linear-gradient(
+    to bottom,
+    #8B0000,
+    #A52A2A
+  );
   padding: 20px 0;
   transition: width 0.3s ease;
   overflow: hidden;
   z-index: 100;
+  border-right: 3px dashed #FFD700; /* Golden dashed border */
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar:hover {
@@ -73,15 +74,19 @@ if (isset($_SESSION['staff_id'])) {
 }
 
 .sidebar .logo {
-  color: white;
+  color: #FFD700; /* Golden text */
   text-align: center;
   margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
 }
 
 .sidebar .logo-name {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
   display: none;
+  font-family: 'Impact', fantasy, sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .sidebar:hover .logo-name {
@@ -95,39 +100,85 @@ if (isset($_SESSION['staff_id'])) {
 }
 
 .sidebar .nav-links li {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.sidebar .nav-links li::before {
+  content: "🍗";
+  position: absolute;
+  left: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .nav-links li::before {
+  opacity: 1;
 }
 
 .sidebar .nav-links a {
-  color: white;
+  color: #FFEBCD; /* Blanched almond text */
   text-decoration: none;
   display: flex;
   align-items: center;
-  padding: 10px 15px;
-  transition: background 0.2s ease;
+  padding: 12px 15px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  margin: 0 10px;
+  background: rgba(255, 215, 0, 0.1);
 }
 
 .sidebar .nav-links a:hover,
 .sidebar .nav-links a.active {
-  background: #1abc9c;
-  border-radius: 8px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 215, 0, 0.3),
+    rgba(218, 165, 32, 0.3)
+  );
+  color: white;
+  transform: translateX(5px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
 }
 
 .sidebar .nav-links i {
-  font-size: 20px;
+  font-size: 22px;
   width: 30px;
   text-align: center;
+  color: #FFD700;
 }
 
 .sidebar .nav-links .link-name {
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.3s ease;
-  margin-left: 10px;
+  margin-left: 15px;
+  font-weight: 600;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
 .sidebar:hover .nav-links .link-name {
   opacity: 1;
+}
+
+/* Logo image styling */
+.logo-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #FFD700;
+  display: block;
+  margin: 0 auto 15px auto;
+  transition: all 0.3s ease;
+  background: white;
+  padding: 2px;
+}
+
+.sidebar:hover .logo-img {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #FFD700;
 }
 
 /* Main Content */
@@ -135,26 +186,30 @@ if (isset($_SESSION['staff_id'])) {
   margin-left: 80px;
   padding: 20px;
   transition: margin-left 0.3s ease;
+  background-color: #FFF5E1; /* Light creamy background */
+  background-image: url('https://transparenttextures.com/patterns/food.png');
 }
 
 .sidebar:hover ~ .main-content {
   margin-left: 220px;
 }
 
-.logo-img {
-  width: 60px;              /* Set width */
-  height: 60px;             /* Set height */
-  object-fit: cover;        /* Crop image to fit */
-  border-radius: 50%;       /* Makes it circular */
-  border: 2px solid #1abc9c; /* Optional: adds a nice colored border */
-  display: block;
-  margin: 0 auto 10px auto; /* Center and add spacing below */
+/* Add some chicken-themed decorations */
+.sidebar::after {
+  content: "";
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" font-family="Arial" font-size="40" fill="%23FFD700" text-anchor="middle" dominant-baseline="middle">🍗</text></svg>');
+  opacity: 0.2;
+  transition: all 0.3s ease;
 }
 
-
-.sidebar:hover .logo-img {
-  width: 50px;
-  height: 50px;
+.sidebar:hover::after {
+  opacity: 0.1;
+  transform: translateX(-50%) scale(1.5);
 }
-
 </style>

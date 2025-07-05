@@ -1,13 +1,12 @@
-<!-- enhanced index.php -->
 <?php include('header.php'); ?>
 <link rel="stylesheet" href="assets/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
 <main class="container py-4">
-    <body style="background: url('images/bg1.png') no-repeat center center fixed; background-size: cover;"></body>
+    <body style="background: #FFF5E1 url('https://transparenttextures.com/patterns/food.png');"></body>
   <div id="menu-section" class="row gy-4 mb-4 text-center">
     <div class="col-12">
-      <div class="spinner-border text-primary" role="status"></div>
+      <div class="spinner-border text-warning" role="status"></div>
       <p>Loading menu...</p>
     </div>
   </div>
@@ -15,7 +14,7 @@
   <div class="row g-4">
     <!-- Order Summary -->
     <div class="col-md-6">
-      <div class="card shadow-sm">
+      <div class="card shadow-sm menu-box">
         <div class="card-body">
           <h4 class="card-title mb-3">Your Order</h4>
           <div id="order-items">
@@ -26,12 +25,12 @@
             <strong>Total:</strong>
             <strong>RM <span id="order-total">0.00</span></strong>
           </div>
-          <button id="checkout-btn" class="btn btn-danger w-100 mt-3" disabled>Proceed to Payment</button>
+          <button id="checkout-btn" class="btn btn-warning w-100 mt-3" disabled>Proceed to Payment</button>
         </div>
       </div>
     </div>
 
-    <!-- Payment Method -->
+    <!-- Payment Method - Original Style -->
     <div class="col-md-6">
       <div id="payment-method" class="card shadow-sm d-none">
         <div class="card-body">
