@@ -35,7 +35,12 @@ if (isset($_SESSION['staff_id'])) {
         <span class="link-name">Reports</span>
       </a>
     </li>
-    
+    <li>
+      <a href="orderdetails.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'orderdetails.php') ? 'active' : ''; ?>">
+        <i class="fas fa-list"></i>
+        <span class="link-name">Order Details</span>
+      </a>
+    </li>
     <?php if ($isManager): ?>
     <li>
       <a href="manager.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'manager.php') ? 'active' : ''; ?>">
@@ -45,6 +50,7 @@ if (isset($_SESSION['staff_id'])) {
     </li>
     
     <?php endif; ?>
+
     <li>
   <a href="#" id="logout-btn">
     <i class="fas fa-sign-out-alt"></i>
