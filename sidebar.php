@@ -43,7 +43,14 @@ if (isset($_SESSION['staff_id'])) {
         <span class="link-name">Manager</span>
       </a>
     </li>
+    
     <?php endif; ?>
+    <li>
+  <a href="#" id="logout-btn">
+    <i class="fas fa-sign-out-alt"></i>
+    <span class="link-name">Logout</span>
+  </a>
+</li>
   </ul>
 </div>
 
@@ -213,3 +220,30 @@ if (isset($_SESSION['staff_id'])) {
   transform: translateX(-50%) scale(1.5);
 }
 </style>
+
+<script>
+document.getElementById('logout-btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  
+  // Ask for confirmation
+  if (confirm('Are you sure you want to logout?')) {
+    // Send an AJAX request to logout
+    fetch('logout.php', {
+      method: 'POST',
+      credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        window.location.href = 'login.php'; // Redirect to login page
+      } else {
+        alert('Logout failed. Please try again.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred during logout.');
+    });
+  }
+});
+</script>
