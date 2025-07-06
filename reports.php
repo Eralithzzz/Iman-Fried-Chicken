@@ -61,7 +61,8 @@ while ($row = oci_fetch_assoc($statement)) {
         }
 
         .container {
-            margin-left: 250px; /* Assuming sidebar width */
+            margin-left: 150px; /* Assuming sidebar width */
+            margin-right : 50px;
             padding: 20px;
         }
 

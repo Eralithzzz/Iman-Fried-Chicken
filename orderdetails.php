@@ -59,7 +59,8 @@ oci_execute($statement);
         }
 
         .container {
-            margin-left: 250px;
+            margin-left: 150px;
+            margin-right: 50px;
             padding: 20px;
         }
 
